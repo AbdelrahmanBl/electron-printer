@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Available Printers:</h2>
+    <ul id="printer-list"></ul>
+
+    <script>
+      const { ipcRenderer } = require('electron');
+
+      ipcRenderer.on('printers-list', (event, printers) => {
+        const ul = document.getElementById('printer-list');
+        printers.forEach(printer => {
+          const li = document.createElement('li');
+          li.textContent = printer.name;
+          ul.appendChild(li);
+        });
+      });
+    //   window.print();
+    </script>
+  </body>
+</html>
