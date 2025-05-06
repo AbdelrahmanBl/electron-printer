@@ -7,8 +7,8 @@
     <script>
       const { ipcRenderer } = require('electron');
 
-      if(windows.printers.length) {
-        windows.printers.forEach(printer => {
+      if(window.printers.length) {
+        window.printers.forEach(printer => {
           const li = document.createElement('li');
           li.textContent = printer.name;
           ul.appendChild(li);

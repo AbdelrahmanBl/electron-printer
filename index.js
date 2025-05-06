@@ -12,11 +12,11 @@ const createWindow = () => {
 
   win.loadFile('index.html')
 
-  windows.printers = [];
+  window.printers = [];
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.getPrintersAsync().then(printers => {
-        windows.printers = printers;
+      window.printers = printers;
     });
     // console.log(win.webContents);
     
