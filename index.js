@@ -18,7 +18,7 @@ function sendToPrinter(htmlContent, printerName) {
     const printWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false,
+        show: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -30,8 +30,8 @@ function sendToPrinter(htmlContent, printerName) {
 
     printWindow.webContents.on('did-finish-load', () => {
         printWindow.webContents.print({
-            silent: true,
-            printBackground: true,
+            silent: false,
+            printBackground: false,
             deviceName: printerName
         }, (success, failureReason) => {
             if (!success) {
