@@ -12,11 +12,11 @@ const createWindow = () => {
 
   win.loadFile('index.html')
 
-  printersList = [];
+  windows.printers = [];
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.getPrintersAsync().then(printers => {
-        printersList = printers;
+        windows.printers = printers;
     });
     // console.log(win.webContents);
     
@@ -24,7 +24,7 @@ const createWindow = () => {
     // console.log('Available Printers:', printers);
     
     // Optionally send to renderer
-    win.webContents.send('printers-list', printersList);
+    // win.webContents.send('printers-list', printersList);
   });
 }
 
