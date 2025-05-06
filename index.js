@@ -1,33 +1,21 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
 
-const createWindow = () => {
+function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-        nodeIntegration: true, // Required to use Node.js in renderer
-        contextIsolation: false,
-    },
-  })
+      preload: path.join(__dirname, 'preload.js')
+    }
+  });
 
-  win.loadFile('index.html')
+  win.loadFile('index.html');
 
-  window.printers = [];
-
-  win.webContents.on('did-finish-load', () => {
-    win.webContents.getPrintersAsync().then(printers => {
-      window.printers = printers;
-    });
-    // console.log(win.webContents);
-    
-    // const printers = win.webContents.getPrinters();
-    // console.log('Available Printers:', printers);
-    
-    // Optionally send to renderer
-    // win.webContents.send('printers-list', printersList);
+  // Handle request for printers
+  ipcMain.handle('get-printers', () => {
+    return win.webContents.getPrintersAsync(); // returns a promise
   });
 }
 
-app.whenReady().then(() => {
-    createWindow()
-})
+app.whenReady().then(createWindow);
