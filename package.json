@@ -22,5 +22,8 @@
     "linux": {
       "target": "AppImage"
     }
+  },
+  "dependencies": {
+    "pusher-js": "^8.4.0"
   }
 }
