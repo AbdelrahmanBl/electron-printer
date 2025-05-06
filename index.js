@@ -16,20 +16,7 @@ const createWindow = () => {
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.getPrintersAsync().then(printers => {
-        console.log('printers', printers);
-        
-        printers.forEach(printer => {
-            console.log('Printer', printer);
-            
-            printersList.push({
-                name: printer.name,
-                isDefault: printer.isDefault,
-                isRemote: printer.isRemote,
-                isColor: printer.isColor,
-                isDuplex: printer.isDuplex,
-                isWireless: printer.isWireless,
-            });
-        })
+        printersList = printers;
     });
     // console.log(win.webContents);
     
