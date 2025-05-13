@@ -1,9 +1,9 @@
-const { app } = require('electron');
-const globals = require('./globals.js');
-const window = require('./helpers/window.js');
-const config = require('./handlers/config.js');
-const handlers = require('./handlers/handlers.js');
-const guard = require('./middlewares/guard.js');
+import { app } from 'electron';
+import * as globals from './globals.js';
+import * as window from './helpers/window.js';
+import * as config from './handlers/config.js';
+import * as handlers from './handlers/handlers.js';
+import * as guard from './middlewares/guard.js';
 
 function initializeApp() {
     // Set global variables
@@ -13,13 +13,13 @@ function initializeApp() {
     global.mainWindow = window.createWindow();
 
     // Load configuration from config.json
-    if(! config.initConfig()) return;
+    if (!config.initConfig()) return;
 
     // Set up IPC handlers
     handlers.defineHandlers();
 
     // Show dashboard page if user logged in or login page if not
-    if(! guard.loggedIn()) {
+    if (!guard.loggedIn()) {
         global.mainWindow.loadFile(global.paths.pages.login);
     }
 }
