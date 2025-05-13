@@ -8,4 +8,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getPrinters: () => ipcRenderer.invoke('get-printers'),
     login: (credentials) => ipcRenderer.invoke('login', credentials),
     syncPrinters: (json) => ipcRenderer.invoke('sync-printers', json),
+    startPusherChannelFor: (branchId) => ipcRenderer.invoke('start-pusher-channel-for', branchId),
+    // printHtml: () => ipcRenderer.invoke('print-html'),
 });

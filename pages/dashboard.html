@@ -12,6 +12,8 @@
         <h1>
             Hello, <span id="fullname"></span>
         </h1>
+        <button type="button" class="btn btn-primary" id="bind-btn">Bind</button>
+
         <form id="sync-printers-form" style="margin-top: 1.5rem;">
             <div>
                 <select name="business_location_id" id="branches"></select>
@@ -26,6 +28,7 @@
 
     <script>
         const syncPrintersForm = document.getElementById('sync-printers-form');
+        const bindBtn = document.getElementById('bind-btn');
         const branches = document.getElementById('branches');
 
         window.electronAPI.getUserStore().then(data => {
@@ -94,6 +97,11 @@
             }
 
             window.electronAPI.syncPrinters(jsonData);
+        })
+
+        bindBtn.addEventListener('click', () => {
+            const branchId = branches.value;
+            window.electronAPI.startPusherChannelFor(branchId);
         })
     </script>
 </body>

@@ -1,6 +1,19 @@
 import { dialog } from 'electron';
 import fs from 'fs';
 
+function get(path) {
+    return fetch(global.config.apiEndpoint + '/' + path, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getUserToken(),
+        }
+    })
+    .then(response => handleResponse(response))
+    .catch(error => handleError(error))
+}
+
 function post(path, data) {
     return fetch(global.config.apiEndpoint + '/' + path, {
         method: 'POST',
@@ -73,4 +86,4 @@ function handleError(error) {
     }
 }
 
-export { post };
+export { get, post };

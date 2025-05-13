@@ -4,8 +4,6 @@ const window = require('./helpers/window.js');
 const config = require('./handlers/config.js');
 const handlers = require('./handlers/handlers.js');
 const guard = require('./middlewares/guard.js');
-// const Pusher = require('pusher-js');
-// const { definePusher, sendToPrinter } = require('./helpers/printer.js');
 
 function initializeApp() {
     // Set global variables
