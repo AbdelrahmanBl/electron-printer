@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Printers</title>
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body class="container dashboard-container">
+    <div>
+        <div>
+            Hello, <span id="fullname"></span>
+        </div>
+        <div>
+            <label for="branches">Branche</label>
+            <select id="branches"></select>
+        </div>
+        <h1>Printers:</h1>
+        <ul id="printer-list"></ul>
+    </div>
+
+    <script>
+        const branches = document.getElementById('branches');
+
+        window.electronAPI.getStore().then(data => {
+            document.getElementById('fullname').textContent = data.user.fullname;
+            loadBranchOptions(data.business_locations);
+        });
+
+        window.electronAPI.getPrinters().then(printers => {
+            const list = document.getElementById('printer-list');
+            printers.forEach(printer => {
+                const li = document.createElement('li');
+                li.textContent = printer.name;
+                list.appendChild(li);
+            });
+        });
+
+        function loadBranchOptions(businessLocations) {
+            businessLocations.forEach(businessLocation => {
+                const option = document.createElement('option');
+                option.value = businessLocation.id;
+                option.textContent = businessLocation.name;
+                branches.append(option);
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjgzNWFhZWE5ZWUyYTYwZTBkYTk2OWE3NmE5YWU5YzU4ZTc0NGE2NTY1NTQ3YzJhMDQ4ODIyNTNlYzhmOWM4ZjgyNTZiZDg4MjJiYzUzMDFiIn0.eyJhdWQiOiIxMCIsImp0aSI6IjgzNWFhZWE5ZWUyYTYwZTBkYTk2OWE3NmE5YWU5YzU4ZTc0NGE2NTY1NTQ3YzJhMDQ4ODIyNTNlYzhmOWM4ZjgyNTZiZDg4MjJiYzUzMDFiIiwiaWF0IjoxNzQ3MTM1MjEyLCJuYmYiOjE3NDcxMzUyMTIsImV4cCI6MTc3ODY3MTIxMiwic3ViIjoiMyIsInNjb3BlcyI6W119.B6x26EaL9cBUhoPtsDhEG0ifICrow5VgPV0cLXecq-dBgPyizP9u7v8L6B6ueXVX5cTODtg8tLD91Qx9XpA3xL6ka4TQTJg4gR404FyyjtBRWRNJiRjWzVrKRZzmFtIYmAzzzw4j9-ySksEj8QlCtCuA8tSJJzhHnav-ftwF-yW_zcbQdB27z7ZjramM77BVlgyRu5cFkiSluuX1M3egNBvTv2eB6gnhpKewejIMFcCCZy9gaq5wL9YUy4kfvWiwUGsu5oyKctWwcR41CK_XxUF6kP-xzRKNAf4zYssgFsQBHQbVZYxEtCFT0mrSknFmshbPdvOS8rfOHR6KEzc-Zn758GnCUN3JGmrnO4b8MESEJtCncvaiPRYFPVRTKbDjnI4pedrDJd1FNG117W2G8YXz6pN5N4Cr-psk2-eFPawpeeizaWEstsjR0ZFpjingbzJITIWK7bt8Y3JgBqZZYzSmLRJtHGVt-dQ47a1CcczEJwm3BimNuZ-2UoC1HQNgHhXEPbPW63wkmaEyh600-k4q0mcSDBfcaWnqKkReyzQKbCphlADVH-JI3WJf_9AelC0sON8puKiCfdJVipCYzba9ZRn9tCXWOPw5QmARLl5TWdC7zDF34wzCPi1mmPzWOcFBbdLdVejmFoiiR995FNJyDFhMEODZ7oYL7u5kiFY",
+  "user": {
+    "id": 3,
+    "fullname": " Admin "
+  },
+  "business_locations": [
+    {
+      "id": 3,
+      "name": "micr0smart Admin"
+    },
+    {
+      "id": 176,
+      "name": "موسسة خطوات فرع٢"
+    }
+  ],
+  "pusher_settings": {
+    "key": "ff383959a24accbacd3c",
+    "cluster": "eu"
+  }
+}
