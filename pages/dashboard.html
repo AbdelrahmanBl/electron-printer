@@ -33,7 +33,7 @@
             loadBranchOptions(data.business_locations);
         });
 
-        window.electronAPI.getPrinters().then((printers, index) => {
+        window.electronAPI.getPrinters().then(printers => {
             const printerList = document.getElementById('printer-list');
 
             if (! printers.length) {
@@ -41,7 +41,7 @@
                 return;
             }
 
-            printers.forEach(printer => {
+            printers.forEach((printer, index) => {
                 const printerItem = document.createElement('div');
                 printerItem.classList.add('printer-item');
 
