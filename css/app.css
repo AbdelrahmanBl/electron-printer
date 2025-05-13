@@ -93,7 +93,7 @@ body.login-body {
 
 .container label {
     font-size: 13px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     display: block;
     color: #cccccc;
 }
@@ -123,4 +123,71 @@ body.login-body {
     outline: none;
     background-color: #4b4e6d;
     box-shadow: 0 0 0 2px #5c62ec;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+/* Primary style */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.btn-primary:active {
+    background-color: #005cbf;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:disabled {
+    background-color: #c0d3ec;
+    cursor: not-allowed;
+}
+
+
+/* Container */
+.printers {
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+h1 {
+    font-size: 24px;
+    margin: 0px;
+    color: #333;
+}
+
+/* Printer Item */
+.printer-item {
+    display: flex;
+    margin: 10px 0px;
+    gap: 10px;
+}
+
+.printer-item label {
+    font-size: 16px;
+    color: #444;
+}
+
+.printer-item input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#printer-list {
+    padding: 0.5rem 0;
 }

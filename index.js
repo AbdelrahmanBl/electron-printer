@@ -12,17 +12,17 @@ function initializeApp() {
     globals.initGlobals();
 
     // Create the main application window
-    const mainWindow = window.createWindow();
+    global.mainWindow = window.createWindow();
 
     // Load configuration from config.json
     if(! config.initConfig()) return;
 
     // Set up IPC handlers
-    handlers.defineHandlers(mainWindow);
+    handlers.defineHandlers();
 
     // Show dashboard page if user logged in or login page if not
-    if(! guard.loggedIn(mainWindow)) {
-        mainWindow.loadFile(global.paths.pages.login);
+    if(! guard.loggedIn()) {
+        global.mainWindow.loadFile(global.paths.pages.login);
     }
 }
 

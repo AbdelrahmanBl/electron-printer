@@ -9,35 +9,61 @@
 
 <body class="container dashboard-container">
     <div>
-        <div>
+        <h1>
             Hello, <span id="fullname"></span>
-        </div>
-        <div>
-            <label for="branches">Branche</label>
-            <select id="branches"></select>
-        </div>
-        <h1>Printers:</h1>
-        <ul id="printer-list"></ul>
+        </h1>
+        <form id="sync-printers-form" style="margin-top: 1.5rem;">
+            <div>
+                <select name="business_location_id" id="branches"></select>
+                <button type="submit" class="btn btn-primary">Sync</button>
+            </div>
+            <div class="printers">
+                <h1>Printers:</h1>
+                <div id="printer-list"></div>
+            </div>
+        </form>
     </div>
 
     <script>
+        const syncPrintersForm = document.getElementById('sync-printers-form');
         const branches = document.getElementById('branches');
 
-        window.electronAPI.getStore().then(data => {
+        window.electronAPI.getUserStore().then(data => {
             document.getElementById('fullname').textContent = data.user.fullname;
             loadBranchOptions(data.business_locations);
         });
 
-        window.electronAPI.getPrinters().then(printers => {
-            const list = document.getElementById('printer-list');
+        window.electronAPI.getPrinters().then((printers, index) => {
+            const printerList = document.getElementById('printer-list');
+
+            if (! printers.length) {
+                printerList.textContent = 'No Printers Available!';
+                return;
+            }
+
             printers.forEach(printer => {
-                const li = document.createElement('li');
-                li.textContent = printer.name;
-                list.appendChild(li);
+                const printerItem = document.createElement('div');
+                printerItem.classList.add('printer-item');
+
+                const inputElement = document.createElement('input');
+                inputElement.name = 'printers[]';
+                inputElement.type = 'checkbox';
+                inputElement.id = `printer-${index}`;
+                inputElement.value = printer.name;
+
+                const labelElement = document.createElement('label');
+                labelElement.setAttribute('for', `printer-${index}`);
+                labelElement.textContent = printer.name;
+
+                printerItem.appendChild(inputElement);
+                printerItem.appendChild(labelElement);
+
+                printerList.appendChild(printerItem);
             });
         });
 
         function loadBranchOptions(businessLocations) {
+            businessLocations.unshift({ id: '', name: 'Select Branch' });
             businessLocations.forEach(businessLocation => {
                 const option = document.createElement('option');
                 option.value = businessLocation.id;
@@ -45,6 +71,30 @@
                 branches.append(option);
             })
         }
+
+        syncPrintersForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(syncPrintersForm);
+
+            let jsonData = {};
+
+            for (const [key, value] of formData.entries()) {
+                const normalizedKey = key.replace(/\[\]$/, ''); // Remove brackets 
+
+                if (jsonData[normalizedKey] !== undefined) {
+                    if (!Array.isArray(jsonData[normalizedKey])) {
+                        jsonData[normalizedKey] = [jsonData[normalizedKey]];
+                    }
+                    jsonData[normalizedKey].push(value);
+                } else {
+                    const normalizedValue = key.endsWith('[]') ? [value] : value;
+                    jsonData[normalizedKey] = normalizedValue;
+                }
+            }
+
+            window.electronAPI.syncPrinters(jsonData);
+        })
     </script>
 </body>
 

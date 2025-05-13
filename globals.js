@@ -6,7 +6,7 @@ const __dirname = path.dirname(__filename);
 
 const preloadPath = () => path.join(__dirname, 'preload.js');
 
-const configPath = () => path.join(__dirname, 'config0.json');
+const configPath = () => path.join(__dirname, 'config.json');
 
 const pagesPaths = () => ({
     login: path.join(__dirname, 'pages/login.html'),

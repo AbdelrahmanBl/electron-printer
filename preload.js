@@ -4,7 +4,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 // const filePath = path.join(__dirname, 'data.json');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-    getStore: () => ipcRenderer.invoke('get-store'),
+    getUserStore: () => ipcRenderer.invoke('get-user-store'),
     getPrinters: () => ipcRenderer.invoke('get-printers'),
     login: (credentials) => ipcRenderer.invoke('login', credentials),
+    syncPrinters: (json) => ipcRenderer.invoke('sync-printers', json),
 });
