@@ -1,5 +1,17 @@
 import { BrowserWindow, dialog } from 'electron';
 
+function definePusher() {
+    // const pusher = new Pusher('ff383959a24accbacd3c', {
+    //     cluster: 'eu'
+    // });
+    // const channel = pusher.subscribe('print-channel');
+    // channel.bind('print-html', (data) => {
+    //     const htmlContent = data.html; // HTML content to print
+    //     const printerName = data.printer;    // Exact printer name
+    //     sendToPrinter(htmlContent, printerName);
+    // });
+}
+
 function sendToPrinter(htmlContent, printerName) {
     // console.log(htmlContent, printerName);
 
@@ -40,4 +52,4 @@ function sendToPrinter(htmlContent, printerName) {
     });
 }
 
-export { sendToPrinter };
+export { definePusher, sendToPrinter };

@@ -1,46 +1,29 @@
-const { app, BrowserWindow, dialog } = require('electron');
-const path = require('path');
-const fs = require('fs');
-const Pusher = require('pusher-js');
+const { app } = require('electron');
 const globals = require('./globals.js');
-const handlers = require('./handlers/handlers.js');
+const window = require('./helpers/window.js');
 const config = require('./handlers/config.js');
+const handlers = require('./handlers/handlers.js');
 const guard = require('./middlewares/guard.js');
-const { sendToPrinter } = require('./helpers/printer.js');
+// const Pusher = require('pusher-js');
+// const { definePusher, sendToPrinter } = require('./helpers/printer.js');
 
-// Define the global file paths...
-globals.defineGlobals();
+function initializeApp() {
+    // Set global variables
+    globals.initGlobals();
 
-// const pusher = new Pusher('ff383959a24accbacd3c', {
-//     cluster: 'eu'
-// });
-// const channel = pusher.subscribe('print-channel');
-// channel.bind('print-html', (data) => {
-//     const htmlContent = data.html; // HTML content to print
-//     const printerName = data.printer;    // Exact printer name
-//     sendToPrinter(htmlContent, printerName);
-// });
+    // Create the main application window
+    const mainWindow = window.createWindow();
 
-function createWindow() {
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
-        }
-    });
+    // Load configuration from config.json
+    if(! config.initConfig()) return;
 
-    config.terminateAppWhenConfigNotFound();
-
-    config.loadConfig();
-
+    // Set up IPC handlers
     handlers.defineHandlers(mainWindow);
 
-    // redirect user to dashboard if logged in...
+    // Show dashboard page if user logged in or login page if not
     if(! guard.loggedIn(mainWindow)) {
-        // display login page if not logged in...
         mainWindow.loadFile(global.paths.pages.login);
     }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(initializeApp);

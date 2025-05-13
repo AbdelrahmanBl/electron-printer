@@ -4,21 +4,24 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const storesPaths = () => ({
-    user: path.join(__dirname, 'stores/user.json'),
-});
+const preloadPath = () => path.join(__dirname, 'preload.js');
+
+const configPath = () => path.join(__dirname, 'config0.json');
 
 const pagesPaths = () => ({
     login: path.join(__dirname, 'pages/login.html'),
     dashboard: path.join(__dirname, 'pages/dashboard.html'),
-}); 
+});
 
-const configPath = () => path.join(__dirname, 'config.json');
+const storesPaths = () => ({
+    user: path.join(__dirname, 'stores/user.json'),
+});
 
-export function defineGlobals() {
+export function initGlobals() {
     global.paths = {
-        stores: storesPaths(),
-        pages: pagesPaths(),
+        preload: preloadPath(),
         config: configPath(),
+        pages: pagesPaths(),
+        stores: storesPaths(),
     }
 }
