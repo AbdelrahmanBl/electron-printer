@@ -16,8 +16,21 @@ function getUserStore() {
     }
 }
 
+function definePusherInstance() {
+    if (global.pusher) {
+        return;
+    }
+
+    const user = getUserStore();
+    const pusherSettings = user.pusher_settings;
+
+    global.pusher = new Pusher(pusherSettings.key, {
+        cluster: pusherSettings.cluster
+    });
+}
+
 export function defineHandlers() {
-// Handle request for printers
+    // Handle request for printers
     ipcMain.handle('get-printers', () => {
         return global.mainWindow.webContents.getPrintersAsync(); // returns a promise
     });
@@ -28,26 +41,51 @@ export function defineHandlers() {
         return post('login', credentials)
         .then(result => {
             fs.writeFileSync(global.paths.stores.user, JSON.stringify(result.data, null, 2), 'utf8');
-            global.mainWindow.loadFile(global.paths.pages.dashboard);
+            global.mainWindow.loadFile(global.paths.pages.connect);
         });
     });
 
-    ipcMain.handle('sync-printers', (event, json) => {
+    ipcMain.handle('logout', () => {
+        if (fs.existsSync(global.paths.stores.user)) {
+            fs.unlinkSync(global.paths.stores.user);
+        }
+
+        global.mainWindow.loadFile(global.paths.pages.login);
+    });
+
+    ipcMain.handle('sync', (event, json) => {
         return post('receipt-printers/sync', json);
     });
 
     ipcMain.handle('start-pusher-channel-for', (event, branchId) => {
-        const user = getUserStore();
-        const pusherSettings = user.pusher_settings;
+        return new Promise((resolve, reject) => {
+            definePusherInstance();
 
-        const pusher = new Pusher(pusherSettings.key, {
-            cluster: pusherSettings.cluster
+            const channelName = `print-channel-${branchId}`;
+
+            const channel = global.pusher.subscribe(channelName);
+            
+            channel.bind('print-html', (data) => {
+                // add to log channel
+                const logMessage = `received print-html for transaction ID: ${data.transaction_id}`;
+                global.mainWindow.send('channel-log', logMessage);
+
+                printTransaction(data.transaction_id);
+            });
+
+            resolve(channelName);
         });
+    });
 
-        const channel = pusher.subscribe(`print-channel-${branchId}`);
-        
-        channel.bind('print-html', (data) => {
-            printTransaction(data.transaction_id);
+    ipcMain.handle('stop-pusher-channel-for', (event, branchId) => {
+        return new Promise((resolve, reject) => {
+            definePusherInstance();
+
+            const channelName = `print-channel-${branchId}`;
+
+            global.pusher.unsubscribe(channelName);
+
+            resolve(channelName);
         });
     });
 }

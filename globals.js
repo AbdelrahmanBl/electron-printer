@@ -11,13 +11,14 @@ const configPath = () => path.join(__dirname, 'config.json');
 
 const pagesPaths = () => ({
     login: path.join(__dirname, 'pages/login.html'),
-    dashboard: path.join(__dirname, 'pages/dashboard.html'),
+    connect: path.join(__dirname, 'pages/connect.html'),
+    sync: path.join(__dirname, 'pages/sync.html'),
 });
 
 const storesPaths = () => {
 	const userDataPath = app.getPath('userData');
 	return {
-	    user: path.join(userDataPath, 'stores/user.json'),
+	    user: path.join(userDataPath, 'user.json'),
 	};
 }; 
 

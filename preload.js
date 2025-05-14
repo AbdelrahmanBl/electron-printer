@@ -7,7 +7,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getUserStore: () => ipcRenderer.invoke('get-user-store'),
     getPrinters: () => ipcRenderer.invoke('get-printers'),
     login: (credentials) => ipcRenderer.invoke('login', credentials),
-    syncPrinters: (json) => ipcRenderer.invoke('sync-printers', json),
+    logout: () => ipcRenderer.invoke('logout'),
+    syncPrinters: (json) => ipcRenderer.invoke('sync', json),
     startPusherChannelFor: (branchId) => ipcRenderer.invoke('start-pusher-channel-for', branchId),
-    // printHtml: () => ipcRenderer.invoke('print-html'),
+    stopPusherChannelFor: (branchId) => ipcRenderer.invoke('stop-pusher-channel-for', branchId),
+    onChannelLog: (callback) => ipcRenderer.on('channel-log', callback),
 });

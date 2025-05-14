@@ -6,7 +6,7 @@ function loggedIn() {
         const rawData = fs.readFileSync(global.paths.stores.user, 'utf8');
         const data = JSON.parse(rawData);
         if (data.token) {
-            global.mainWindow.loadFile(global.paths.pages.dashboard);
+            global.mainWindow.loadFile(global.paths.pages.connect);
             return true;
         }
     }

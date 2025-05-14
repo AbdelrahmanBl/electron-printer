@@ -1,11 +1,14 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #dbdbdb !important;
+}
+
 body {
     background-color: #1e1e2f;
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-}
-
-body * {
-    color: #dbdbdb !important;
 }
 
 body.login-body {
@@ -13,10 +16,6 @@ body.login-body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.dashboard-container {
-    padding: 1rem;
 }
 
 .login-container {
@@ -63,6 +62,10 @@ body.login-body {
     text-align: center;
 }
 
+.hidden {
+    display: none;
+}
+
 .container input[type="text"],
 .container input[type="password"],
 .container input[type="email"] {
@@ -107,7 +110,8 @@ body.login-body {
     background-color: #3e405a;
     color: #dbdbdb;
     font-size: 14px;
-    appearance: none; /* Remove default arrow for custom styling */
+    appearance: none;
+    /* Remove default arrow for custom styling */
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%23dbdbdb' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
@@ -155,6 +159,47 @@ body.login-body {
     cursor: not-allowed;
 }
 
+/* Success style */
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+.btn-success:active {
+    background-color: #1e7e34;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success:disabled {
+    background-color: #bdeacb;
+    cursor: not-allowed;
+}
+
+/* Danger style */
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+
+.btn-danger:active {
+    background-color: #bd2130;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger:disabled {
+    background-color: #f1b8be;
+    cursor: not-allowed;
+}
 
 /* Container */
 .printers {
@@ -190,4 +235,48 @@ h1 {
 
 #printer-list {
     padding: 0.5rem 0;
+}
+
+/* dashboard styles */
+.dashboard-menu {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-menu-item {
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-menu-item a {
+    display: block;
+    padding: 1rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dashboard-menu-item:hover {
+    background-color: #1f2937;
+}
+
+.dashboard-menu-item.active {
+    background-color: #1f2937;
+}
+
+.dashboard-menu-item.active a {
+    color: #fff;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
 }

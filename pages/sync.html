@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../asset/css/app.css">
+</head>
+
+<body>
+    <div class="dashboard-menu">
+        <div class="dashboard-menu-item">
+            <a href="connect.html">Connect Printers</a>
+        </div>
+        <div class="dashboard-menu-item active">
+            <a href="sync.html">Sync Printers</a>
+        </div>
+        <div class="dashboard-menu-item">
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+    <div class="content container">
+        <h2>
+            Hello, <span id="fullname"></span>
+        </h2>
+        <div class="card">
+            <h2>Printers</h2>
+            <form id="sync-form">
+                <div>
+                    <select name="business_location_id" id="branches"></select>
+                    <button type="submit" class="btn btn-primary">Sync</button>
+                </div>
+                <div class="printers">
+                    <div id="printer-list"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../asset/js/app.js"></script>
+    <script src="../asset/js/sync.js"></script>
+</body>
+
+</html>
