@@ -19,17 +19,21 @@
         </div>
     </div>
     <div class="content container">
-        <h2>
+        <h2 class="welcome">
             Hello, <span id="fullname"></span>
         </h2>
         <div class="card">
             <h2>Connect</h2>
             <div>
                 <select name="business_location_id" id="branches"></select>
-                <button id="connect-btn" class="btn btn-success">Start</button>
-                <button id="disconnect-btn" class="btn btn-danger hidden">Stop</button>
+                <button id="connect-btn" class="btn btn-success btn-md">Start</button>
+                <button id="disconnect-btn" class="btn btn-danger btn-md hidden">Stop</button>
             </div>
-            <div id="channel-log"></div>
+            <fieldset class="log-box">
+                <legend class="log-title">Log Messages</legend>
+                <div class="log-messages" id="log-messages"></div>
+            </fieldset>
+
         </div>
     </div>
 

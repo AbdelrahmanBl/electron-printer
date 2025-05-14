@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Config</title>
+    <link rel="stylesheet" href="../asset/css/app.css">
+</head>
+
+<body class="guest-body container">
+    <div class="guest-container">
+        <h2>Config</h2>
+        <form id="config-form">
+            <input type="url" id="apiEndpoint" placeholder="Api" required>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        const configForm = document.getElementById('config-form');
+        const apiEndpoint = document.getElementById('apiEndpoint');
+
+        window.onload = () => {
+            apiEndpoint.focus();
+        }
+
+        configForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            window.electronAPI.setConfig({
+                apiEndpoint: apiEndpoint.value.trim(),
+            });
+        });
+    </script>
+</body>
+
+</html>

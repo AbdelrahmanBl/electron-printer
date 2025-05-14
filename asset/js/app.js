@@ -8,7 +8,7 @@ window.electronAPI.getUserStore().then(data => {
 });
 
 function loadBranchOptions(businessLocations) {
-    businessLocations.unshift({ id: '', name: 'Select Branch' });
+    // businessLocations.unshift({ id: '', name: 'Select Branch' });
     businessLocations.forEach(businessLocation => {
         const option = document.createElement('option');
         option.value = businessLocation.id;

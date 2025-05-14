@@ -1,6 +1,6 @@
 const connectButton = document.getElementById('connect-btn');
 const disconnectButton = document.getElementById('disconnect-btn');
-const channelLog = document.getElementById('channel-log');
+const logMessages = document.getElementById('log-messages');
 
 window.electronAPI.getUserStore().then(data => {
     loadBranchOptions(data.business_locations);
@@ -19,7 +19,7 @@ connectButton.addEventListener('click', () => {
         branches.disabled = true;
 
         // add channel log message
-        channelLog.prepend(getChannelLogNode(`connected to channel: ${channelName}`));
+        addLogMessage(`connected to channel: ${channelName}`);
     });
 });
 
@@ -36,12 +36,12 @@ disconnectButton.addEventListener('click', () => {
         branches.disabled = false;
 
         // add channel log message
-        channelLog.prepend(getChannelLogNode(`disconnected from channel: ${channelName}`));
+        addLogMessage(`disconnected from channel: ${channelName}`);
     });
 });
 
 window.electronAPI.onChannelLog((event, message) => {
-    channelLog.prepend(getChannelLogNode(message));
+    addLogMessage(message);
 });
 
 function validateBranchSelection() {
@@ -53,9 +53,10 @@ function validateBranchSelection() {
     return true;
 }
 
-function getChannelLogNode(message) {
+function addLogMessage(message) {
+    const timestamp = new Date().toLocaleTimeString();
     const node = document.createElement('p');
     node.classList.add('channel-log-item');
-    node.textContent = message;
-    return node;
+    node.textContent = `[${timestamp}] ${message}`;
+    logMessages.prepend(node);
 }

@@ -6,6 +6,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
     getUserStore: () => ipcRenderer.invoke('get-user-store'),
     getPrinters: () => ipcRenderer.invoke('get-printers'),
+    setConfig: (json) => ipcRenderer.invoke('set-config', json), 
     login: (credentials) => ipcRenderer.invoke('login', credentials),
     logout: () => ipcRenderer.invoke('logout'),
     syncPrinters: (json) => ipcRenderer.invoke('sync', json),

@@ -1,4 +1,5 @@
 const syncForm = document.getElementById('sync-form');
+const syncButton = document.getElementById('sync-btn');
 
 window.electronAPI.getUserStore().then(data => {
     loadBranchOptions(data.business_locations);
@@ -8,7 +9,7 @@ window.electronAPI.getPrinters().then(printers => {
     const printerList = document.getElementById('printer-list');
 
     if (!printers.length) {
-        printerList.textContent = 'No Printers Available!';
+        printerList.textContent = 'no printers available!';
         return;
     }
 
@@ -36,6 +37,8 @@ window.electronAPI.getPrinters().then(printers => {
 syncForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    syncButton.classList.add('loading');
+
     const formData = new FormData(syncForm);
 
     let jsonData = {};
@@ -54,5 +57,8 @@ syncForm.addEventListener('submit', (e) => {
         }
     }
 
-    window.electronAPI.syncPrinters(jsonData);
+    window.electronAPI.syncPrinters(jsonData)
+    .finally(() => {
+        syncButton.classList.remove('loading');
+    });
 });

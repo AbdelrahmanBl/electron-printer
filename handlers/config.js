@@ -4,7 +4,7 @@ import { dialog } from 'electron';
 function configFileExists() {
     // show error when the config file is not found...
     if (! fs.existsSync(global.paths.config)) {
-        dialog.showErrorBox('Config Error', 'Config file not found');
+        // dialog.showErrorBox('Config Error', 'Config file not found');
         return false;
     }
 

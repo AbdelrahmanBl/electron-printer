@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron';
 import { post } from '../helpers/request.js';
 import { printTransaction } from '../helpers/printer.js';
+import { app } from 'electron';
 import Pusher from 'pusher-js';
 import fs from 'fs';
 
@@ -27,7 +28,7 @@ function definePusherInstance() {
     global.pusher = new Pusher(pusherSettings.key, {
         cluster: pusherSettings.cluster
     });
-}
+}   
 
 export function defineHandlers() {
     // Handle request for printers
@@ -36,6 +37,14 @@ export function defineHandlers() {
     });
 
     ipcMain.handle('get-user-store', () => getUserStore());
+
+    ipcMain.handle('set-config', (event, json) => {
+        // write to config file in userData path `config.json`
+        fs.writeFileSync(global.paths.config, JSON.stringify(json, null, 2), 'utf8');
+
+        app.relaunch();
+        app.exit();
+    });
 
     ipcMain.handle('login', (event, credentials) => {
         return post('login', credentials)
@@ -51,8 +60,11 @@ export function defineHandlers() {
                 if (fs.existsSync(global.paths.stores.user)) {
                     fs.unlinkSync(global.paths.stores.user);
                 }
-                global.mainWindow.loadFile(global.paths.pages.login);
 
+                // remove global pusher channel
+                global.pusher = null;
+
+                global.mainWindow.loadFile(global.paths.pages.login);
             })
     });
 
