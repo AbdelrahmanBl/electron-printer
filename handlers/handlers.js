@@ -46,11 +46,14 @@ export function defineHandlers() {
     });
 
     ipcMain.handle('logout', () => {
-        if (fs.existsSync(global.paths.stores.user)) {
-            fs.unlinkSync(global.paths.stores.user);
-        }
+        return post('logout')
+            .then(result => {
+                if (fs.existsSync(global.paths.stores.user)) {
+                    fs.unlinkSync(global.paths.stores.user);
+                }
+                global.mainWindow.loadFile(global.paths.pages.login);
 
-        global.mainWindow.loadFile(global.paths.pages.login);
+            })
     });
 
     ipcMain.handle('sync', (event, json) => {

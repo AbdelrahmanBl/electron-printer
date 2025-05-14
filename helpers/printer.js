@@ -5,13 +5,12 @@ function printTransaction(transactionId) {
     get(`categories-receipt-printers/transactions/${transactionId}`)
     .then(result => {
         result.data.printers.forEach(printer => {
-            sendToPrinter(printer.name, printer.options, printer.html)
+            sendToPrinter(printer.options, printer.html)
         })
     })
 }
 
-function sendToPrinter(printerName, printOptions, htmlContent) {
-    // console.log(htmlContent, printerName);
+function sendToPrinter(printOptions, htmlContent) {
 
     const printWindow = new BrowserWindow({
         width: 800,
@@ -28,7 +27,7 @@ function sendToPrinter(printerName, printOptions, htmlContent) {
     printWindow.webContents.on('did-finish-load', () => {
         printWindow.webContents.print(printOptions, (success, failureReason) => {
             if (!success) {
-                dialog.showErrorBox('Print Error', 'Print failed: ' + failureReason + ' - ' + printerName);
+                dialog.showErrorBox('Print Error', 'Print failed: ' + failureReason + ' - ' + printOptions.deviceName);
                 console.log('error in print');
             }
             printWindow.close();

@@ -16,7 +16,7 @@ function get(path) {
     });
 }
 
-function post(path, data) {
+function post(path, data = {}) {
     return new Promise((resolve, reject) => {
         return fetch(global.config.apiEndpoint + '/' + path, {
             method: 'POST',
