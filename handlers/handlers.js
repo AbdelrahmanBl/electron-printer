@@ -61,8 +61,12 @@ export function defineHandlers() {
                     fs.unlinkSync(global.paths.stores.user);
                 }
 
-                // remove global pusher channel
-                global.pusher = null;
+                // remove global pusher channel & unsubscribe
+                if (global.pusher) {
+                    global.pusher.unsubscribe(global.channelName);
+                    global.pusher = null;
+                    global.channelName = null;
+                }
 
                 global.mainWindow.loadFile(global.paths.pages.login);
             })
@@ -76,9 +80,9 @@ export function defineHandlers() {
         return new Promise((resolve, reject) => {
             definePusherInstance();
 
-            const channelName = `print-channel-${branchId}`;
+            global.channelName = `print-channel-${branchId}`;
 
-            const channel = global.pusher.subscribe(channelName);
+            const channel = global.pusher.subscribe(global.channelName);
             
             channel.bind('print-html', (data) => {
                 // add to log channel
@@ -88,7 +92,7 @@ export function defineHandlers() {
                 printTransaction(data.transaction_id);
             });
 
-            resolve(channelName);
+            resolve(global.channelName);
         });
     });
 
@@ -96,11 +100,11 @@ export function defineHandlers() {
         return new Promise((resolve, reject) => {
             definePusherInstance();
 
-            const channelName = `print-channel-${branchId}`;
+            global.channelName = `print-channel-${branchId}`;
 
-            global.pusher.unsubscribe(channelName);
+            global.pusher.unsubscribe(global.channelName);
 
-            resolve(channelName);
+            resolve(global.channelName);
         });
     });
 }
