@@ -1,3 +1,4 @@
+import { app } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,9 +14,12 @@ const pagesPaths = () => ({
     dashboard: path.join(__dirname, 'pages/dashboard.html'),
 });
 
-const storesPaths = () => ({
-    user: path.join(__dirname, 'stores/user.json'),
-});
+const storesPaths = () => {
+	const userDataPath = app.getPath('userData');
+	return {
+	    user: path.join(userDataPath, 'stores/user.json'),
+	};
+}; 
 
 export function initGlobals() {
     global.paths = {
