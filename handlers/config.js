@@ -17,6 +17,10 @@ export function init() {
         const configJson = JSON.parse(configData);
         global.config = configJson; 
 
+        if (! configJson.apiEndpoint) {
+            return false;
+        }
+
         return true;
     }
     
