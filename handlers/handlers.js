@@ -40,12 +40,12 @@ export function init() {
 
     ipcMain.handle('get-config', (event) => {
         return new Promise((resolve, reject) => {
-            if (fs.existsSync(global.paths.config)) {
-                const configData = fs.readFileSync(global.paths.config);
-                resolve(JSON.parse(configData));
+            if (! fs.existsSync(global.paths.config)) {
+                throw new Error(null);
             }
-
-            reject(null);
+            
+            const configData = fs.readFileSync(global.paths.config);
+            resolve(JSON.parse(configData));
         });
     });
 

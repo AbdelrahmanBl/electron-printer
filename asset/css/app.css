@@ -92,6 +92,7 @@ button.loading::after {
     cursor: pointer;
 }
 
+.guest-container button.active,
 .guest-container button:hover {
     background-color: #4649c7;
 }
@@ -363,4 +364,18 @@ h1 {
   overflow-y: auto;
   border-radius: 5px;
   /* font-size: 14px; */
+}
+
+.form-row {
+    margin: 10px 0;
+}
+
+form .form-lang {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.half {
+    width: 49% !important;
 }

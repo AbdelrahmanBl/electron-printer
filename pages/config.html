@@ -11,23 +11,41 @@
     <div class="guest-container">
         <h2>Config</h2>
         <form id="config-form">
-            <input type="url" id="apiEndpoint" placeholder="Api" >
-            <button type="submit">Save</button>
-            <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
+            <div>
+                <label>Language</label>
+                <div class="form-lang form-row">
+                    <button type="button" onclick="changeLang(this)" data-lang="ar" class="lang-btn half">Arabic</button>
+                    <button type="button" onclick="changeLang(this)" data-lang="en" class="lang-btn half">English</button>
+                    <input type="hidden" name="lang" value="" id="lang-input">
+                </div>
+            </div>
+            <div>
+                <label for="apiEndpoint">Endpoint</label>
+                <input id="apiEndpoint" type="url" placeholder="Endpoint" >
+            </div>
+            <div class="form-row">
+                <button type="submit">Save</button>
+                <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
+            </div>
         </form>
     </div>
 
+    <script src="../asset/js/lang.js"></script>
     <script>
         const configForm = document.getElementById('config-form');
         const apiEndpoint = document.getElementById('apiEndpoint');
+        const langInput = document.getElementById('lang-input');
+        const langBtns = document.getElementsByClassName('lang-btn');
 
-        window.onload = () => {
+        window.onload = async () => {
             apiEndpoint.focus();
 
             window.electronAPI.getConfig()
             .then((config) => {
                 apiEndpoint.value = config.apiEndpoint;
+                setLang(config.lang);
             })
+            .catch(() => setLang('ar'));
         }
 
         configForm.addEventListener('submit', (e) => {
@@ -35,8 +53,29 @@
 
             window.electronAPI.setConfig({
                 apiEndpoint: apiEndpoint.value.trim(),
+                lang: langInput.value.trim(),
             });
         });
+
+        const changeLang = (_this) => setLang(_this.getAttribute('data-lang'));
+
+        function setLang(value) {
+            if (! ['ar', 'en'].includes(value)) {
+                return;
+            }
+
+            for (let i = 0; i < langBtns.length; i++) {
+                const langBtn = langBtns[i]; 
+
+                langBtn.classList.remove('active');
+
+                if (langBtn.getAttribute('data-lang') == value) {
+                    langBtn.classList.add('active');
+                    
+                    langInput.value = value;
+                }
+            }
+        }
     </script>
 </body>
 
