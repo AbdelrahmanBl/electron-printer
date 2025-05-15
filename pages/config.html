@@ -13,6 +13,7 @@
         <form id="config-form">
             <input type="url" id="apiEndpoint" placeholder="Api" required>
             <button type="submit">Save</button>
+            <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
         </form>
     </div>
 
@@ -22,6 +23,11 @@
 
         window.onload = () => {
             apiEndpoint.focus();
+
+            window.electronAPI.getConfig()
+            .then((config) => {
+                apiEndpoint.value = config.apiEndpoint;
+            })
         }
 
         configForm.addEventListener('submit', (e) => {

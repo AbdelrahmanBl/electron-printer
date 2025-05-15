@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     color: #dbdbdb !important;
+    transition: all 0.25s ease-in-out;
 }
 
 body {
@@ -93,6 +94,15 @@ button.loading::after {
 
 .guest-container button:hover {
     background-color: #4649c7;
+}
+
+.guest-container button.back-btn {
+    margin-top: 0.5rem;
+    background-color: #e74c3c;
+}
+
+.guest-container button.back-btn:hover {
+    background-color: #c0392b;
 }
 
 .error {

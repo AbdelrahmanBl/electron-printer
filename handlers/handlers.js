@@ -30,13 +30,24 @@ function definePusherInstance() {
     });
 }   
 
-export function defineHandlers() {
+export function init() {
     // Handle request for printers
     ipcMain.handle('get-printers', () => {
         return global.mainWindow.webContents.getPrintersAsync(); // returns a promise
     });
 
     ipcMain.handle('get-user-store', () => getUserStore());
+
+    ipcMain.handle('get-config', (event) => {
+        return new Promise((resolve, reject) => {
+            if (fs.existsSync(global.paths.config)) {
+                const configData = fs.readFileSync(global.paths.config);
+                resolve(JSON.parse(configData));
+            }
+
+            reject(null);
+        });
+    });
 
     ipcMain.handle('set-config', (event, json) => {
         // write to config file in userData path `config.json`

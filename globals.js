@@ -21,7 +21,7 @@ const storesPaths = () => ({
     user: path.join(userDataPath, 'user.json'),
 }); 
 
-export function initGlobals() {
+export function define() {
     global.paths = {
         preload: preloadPath(),
         config: configPath(),

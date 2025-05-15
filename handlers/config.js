@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { dialog } from 'electron';
 
 function configFileExists() {
     // show error when the config file is not found...
@@ -11,7 +10,7 @@ function configFileExists() {
     return true;
 }
 
-export function initConfig() {
+export function init() {
     if (configFileExists()) {
         // define config globally...
         const configData = fs.readFileSync(global.paths.config, 'utf8');

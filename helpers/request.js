@@ -1,9 +1,11 @@
 import { dialog } from 'electron';
 import fs from 'fs';
 
+const getApiEndpoint = () => `${global.config.apiEndpoint}/api/receipt-printers/`;
+
 function get(path) {
     return new Promise((resolve, reject) => {
-        return fetch(global.config.apiEndpoint + '/' + path, {
+        return fetch(getApiEndpoint() + path, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +20,7 @@ function get(path) {
 
 function post(path, data = {}) {
     return new Promise((resolve, reject) => {
-        return fetch(global.config.apiEndpoint + '/' + path, {
+        return fetch(getApiEndpoint() + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -40,7 +40,7 @@
                 password: password.value.trim()
             }).catch((error) => {
                 password.value = ''; // Clear password field
-            }).then(() => {
+            }).finally(() => {
                 loginButton.classList.remove('loading');
                 loginButton.disabled = false;
             });
