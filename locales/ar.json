@@ -26,5 +26,6 @@
     "disconnected from channel": "تم إيقاف الاتصال",
     "received print event for transaction": "استقبال حدث طباعة للفاتورة",
     "Please select branch": "من فضلك اختر الفرع",
-    "No printers available!": "لا يوجد طابعات متصلة!"
+    "No printers available!": "لا يوجد طابعات متصلة!",
+    "Please enter pusher settings from the dashboard": "من فضلك أدخل إعدادات pusher من لوحة التحكم"
 }

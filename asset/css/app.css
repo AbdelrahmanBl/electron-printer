@@ -158,6 +158,11 @@ button.loading::after {
     background-color: #3e405a;
 }
 
+.warning-alert {
+    margin: 1rem 1.5rem;
+    background-color: #a37a00;
+}
+
 .container select {
     /* width: 100%; */
     padding: 12px 14px;
