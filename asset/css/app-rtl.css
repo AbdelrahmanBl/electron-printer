@@ -1,3 +1,7 @@
 body {
     direction: rtl;
 }
+
+.container select {
+    direction: ltr;
+}

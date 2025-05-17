@@ -9,7 +9,10 @@ window.electronAPI.getPrinters().then(printers => {
     const printerList = document.getElementById('printer-list');
 
     if (!printers.length) {
-        printerList.textContent = 'no printers available!';
+        window.i18n.t('No printers available!')
+        .then(result => {
+            printerList.textContent = result;
+        })
         return;
     }
 

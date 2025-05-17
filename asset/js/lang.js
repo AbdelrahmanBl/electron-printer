@@ -18,9 +18,10 @@ function setRtl() {
 function translate() {
     for(let i = 0; i < localeElements.length; i++) {
         const localeElement = localeElements[i];
+        const target = localeElement.getAttribute('data-target') || 'textContent';
         window.i18n.t(localeElement.getAttribute('data-key'))
         .then(result => {
-            localeElement.textContent = result;
+            localeElement[`${target}`] = result;
         });
     }
 }

@@ -98,7 +98,8 @@ export function init() {
             
             channel.bind('print-html', (data) => {
                 // add to log channel
-                const logMessage = `received print-html for transaction ID: ${data.transaction_id}`;
+                let logMessage = global.i18n.t('received print event for transaction');
+                logMessage += ': ' + data.transaction_id;
                 global.mainWindow.send('channel-log', logMessage);
 
                 printTransaction(data.transaction_id);

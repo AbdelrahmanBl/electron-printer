@@ -64,7 +64,7 @@ function handleResponse(response) {
                 ? JSON.stringify(result.errors)
                 : result?.message || result?.error || 'An unknown error occurred.';
 
-            dialog.showErrorBox('Login Error', message);
+            dialog.showErrorBox('Error', message);
 
             throw new Error(message);
         });

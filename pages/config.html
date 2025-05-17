@@ -3,29 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Config</title>
+    <title class="locale" data-key="Configurations"></title>
     <link rel="stylesheet" href="../asset/css/app.css">
 </head>
 
 <body class="guest-body container">
     <div class="guest-container">
-        <h2>Config</h2>
+        <h2 class="locale" data-key="Configurations"></h2>
         <form id="config-form">
             <div>
-                <label>Language</label>
+                <label class="locale" data-key="Language"></label>
                 <div class="form-lang form-row">
-                    <button type="button" onclick="changeLang(this)" data-lang="ar" class="lang-btn half">Arabic</button>
-                    <button type="button" onclick="changeLang(this)" data-lang="en" class="lang-btn half">English</button>
+                    <button type="button" onclick="changeLang(this)" data-lang="ar" class="lang-btn half locale" data-key="Arabic"></button>
+                    <button type="button" onclick="changeLang(this)" data-lang="en" class="lang-btn half locale" data-key="English"></button>
                     <input type="hidden" name="lang" value="" id="lang-input">
                 </div>
             </div>
             <div>
-                <label for="apiEndpoint">Endpoint</label>
-                <input id="apiEndpoint" type="url" placeholder="Endpoint" >
+                <label class="locale" data-key="Endpoint" for="apiEndpoint"></label>
+                <input class="locale" id="apiEndpoint" type="url" data-key="Endpoint" data-target="placeholder">
             </div>
             <div class="form-row">
-                <button type="submit">Save</button>
-                <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
+                <button class="locale" data-key="Save" type="submit"></button>
+                <button type="button" class="back-btn locale" data-key="Back" onclick="window.history.back()"></button>
             </div>
         </form>
     </div>

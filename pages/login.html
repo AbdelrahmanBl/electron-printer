@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title class="locale" data-key="Login"></title>
     <link rel="stylesheet" href="../asset/css/app.css">
 </head>
 
 <body class="guest-body container">
     <div class="guest-container">
-        <h2>Login</h2>
+        <h2 class="locale" data-key="Login"></h2>
         <form id="login-form">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" id="login-btn">Login</button>
+            <input type="text" id="username" class="locale" data-key="Username" data-target="placeholder" required>
+            <input type="password" id="password" class="locale" data-key="Password" data-target="placeholder" required>
+            <button type="submit" id="login-btn" class="locale" data-key="Log In"></button>
             <div class="error" id="errorMsg"></div>
         </form>
     </div>

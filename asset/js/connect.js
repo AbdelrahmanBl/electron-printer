@@ -19,7 +19,8 @@ connectButton.addEventListener('click', () => {
         branches.disabled = true;
 
         // add channel log message
-        addLogMessage(`connected to channel: ${channelName}`);
+        window.i18n.t('connected to channel')
+        .then(result => addLogMessage(result + ': ' + channelName));
     });
 });
 
@@ -36,7 +37,8 @@ disconnectButton.addEventListener('click', () => {
         branches.disabled = false;
 
         // add channel log message
-        addLogMessage(`disconnected from channel: ${channelName}`);
+        window.i18n.t('disconnected from channel')
+        .then(result => addLogMessage(result  + ': ' + channelName));
     });
 });
 
@@ -46,7 +48,9 @@ window.electronAPI.onChannelLog((event, message) => {
 
 function validateBranchSelection() {
     if (! branches.value) {
-        alert('Please Select Branch');
+        window.i18n.t('Please select branch')
+        .then(result => alert(result));
+
         return false;
     }
 

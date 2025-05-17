@@ -17,14 +17,14 @@ async function initializeApp() {
     // Set up IPC handlers
     Handlers.init();
 
-    // Create help menu
-    Menu.create();
-
     // Check config exists
     const configExists = Config.init();
 
     // Define global i18n depending on global.config.lang
     global.i18n = await I18n.init();
+
+    // Create help menu
+    Menu.create();
 
     // Load configuration from config.json
     if (! configExists) {

@@ -4,33 +4,34 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title class="locale" data-key="Dashboard"></title>
     <link rel="stylesheet" href="../asset/css/app.css">
 </head>
 
 <body>
     <div class="dashboard-menu">
         <div class="dashboard-menu-item">
-            <a href="connect.html">Connect Printers</a>
+            <a href="connect.html" class="locale" data-key="Connect Printers"></a>
         </div>
         <div class="dashboard-menu-item active">
-            <a href="sync.html">Sync Printers</a>
+            <a href="sync.html" class="locale" data-key="Sync Printers"></a>
         </div>
         <div class="dashboard-menu-item">
-            <a href="#" id="logout">Logout</a>
+            <a href="#" id="logout" class="locale" data-key="Logout"></a>
         </div>
     </div>
     <div class="content container">
         <h2 class="welcome">
-            Hello, <span id="fullname"></span>
+            <span class="locale" data-key="Hello"></span>, <span id="fullname"></span>
         </h2>
         <div class="card">
-            <h2>Printers</h2>
             <form id="sync-form">
+                <h2 class="locale" data-key="Connect Branch"></h2>
                 <div>
                     <select name="business_location_id" id="branches"></select>
-                    <button type="submit" id="sync-btn" class="btn btn-primary btn-md">Sync</button>
+                    <button type="submit" id="sync-btn" class="btn btn-primary btn-md locale" data-key="Sync"></button>
                 </div>
+                <h2 class="locale" data-key="Printers"></h2>
                 <div class="printers">
                     <div id="printer-list"></div>
                 </div>
