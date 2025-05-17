@@ -31,7 +31,8 @@ function definePusherInstance() {
 }   
 
 export function init() {
-    // Handle request for printers
+    ipcMain.handle('translate', (event, key) => global.i18n.t(key))
+
     ipcMain.handle('get-printers', () => {
         return global.mainWindow.webContents.getPrintersAsync(); // returns a promise
     });

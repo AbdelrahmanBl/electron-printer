@@ -5,8 +5,9 @@ import * as Menu from './helpers/menu.js';
 import * as Config from './handlers/config.js';
 import * as Handlers from './handlers/handlers.js';
 import * as Guard from './middlewares/guard.js';
+import * as I18n from './helpers/i18n.js';
 
-function initializeApp() {
+async function initializeApp() {
     // Define global variables
     Globals.define();
 
@@ -19,8 +20,14 @@ function initializeApp() {
     // Create help menu
     Menu.create();
 
+    // Check config exists
+    const configExists = Config.init();
+
+    // Define global i18n depending on global.config.lang
+    global.i18n = await I18n.init();
+
     // Load configuration from config.json
-    if (!Config.init()) {
+    if (! configExists) {
         global.mainWindow.loadFile(global.paths.pages.config);
         return;
     }

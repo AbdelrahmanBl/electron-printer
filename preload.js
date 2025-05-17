@@ -1,7 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-// Define the file path (it will be stored in the user's app data directory)
-// const filePath = path.join(__dirname, 'data.json');
+contextBridge.exposeInMainWorld('i18n', {
+    t: (key) => ipcRenderer.invoke('translate', key),
+});
 
 contextBridge.exposeInMainWorld('electronAPI', {
     getUserStore: () => ipcRenderer.invoke('get-user-store'),

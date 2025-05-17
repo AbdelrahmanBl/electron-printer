@@ -6,6 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const userDataPath = app.getPath('userData');
 
+const i18nPath = () => path.join(__dirname, 'locales/{{lng}}.json');
+
 const preloadPath = () => path.join(__dirname, 'preload.js');
 
 const configPath = () => path.join(userDataPath, 'config.json');
@@ -23,6 +25,7 @@ const storesPaths = () => ({
 
 export function define() {
     global.paths = {
+        i18n: i18nPath(),
         preload: preloadPath(),
         config: configPath(),
         pages: pagesPaths(),
